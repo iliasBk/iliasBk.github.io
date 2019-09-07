@@ -3,51 +3,7 @@
 
 //................\/...SLIDER...\/...................
 
-	var slideWindow = document.getElementById('slider_window');
-	var slideButtonOne = document.getElementById('slide_button_1');
-	var slideButtonTwo = document.getElementById('slide_button_2');
-	var slideButtonThree = document.getElementById('slide_button_3');
-	var slideButtonFour = document.getElementById('slide_button_4');
-	var slideButtonFake = document.getElementById('slide_button_fake');
-	
-
-	slideButtonOne.onclick = function() {
-		document.getElementsByClassName('right_one')[0].style.animation='right_one 500ms';
-		slideWindow.style.marginLeft = '0%';
-		slideButtonTwo.style.display = 'block';
-		slideButtonThree.style.display = 'none';
-	}
-	slideButtonTwo.onclick = function() {
-		document.getElementsByClassName('left_one')[0].style.animation='left_one 500ms';
-		slideWindow.style.marginLeft = '-100%';
-		
-		slideButtonTwo.style.display = 'none';
-		slideButtonThree.style.display = 'block';
-	}
-	slideButtonThree.onclick = function() {
-		document.getElementsByClassName('left_two')[0].style.animation='left_two 500ms';
-		slideWindow.style.marginLeft = '-200%';
-		
-		slideButtonOne.style.display = 'none';
-		slideButtonThree.style.display = 'none';
-		slideButtonFour.style.display = 'block';
-		slideButtonFake.style.display = 'block';
-	}
-	
-	slideButtonFour.onclick = function(){
-		document.getElementsByClassName('right_two')[0].style.animation='right_two 500ms';
-		slideWindow.style.marginLeft = '-100%';
-		slideButtonOne.classList.remove('slide_button_4');
-		
-		slideButtonFour.style.display = 'none';
-		slideButtonFake.style.display = 'none';
-		slideButtonThree.style.display = 'block';
-		slideButtonOne.style.display = 'block';
-	}
-	
-	
-	
-	//..............appear and deasapper on scroll ..............
+	//...........slider appear and deasapper on scroll ..............
 	
 	var slider = document.getElementById('slider');
 	
@@ -65,24 +21,108 @@
 	
 	//.....................SLIDER ADAPTER......................
 	
+	var slider_width = slider.clientWidth-(slider.clientWidth % 100);
+	slider.style.width = slider_width;
 	
-		var sliderWindowOverfolw = document.getElementsByClassName('slider_window_overflow')[0];
-		var slideButtons = document.getElementById('slide_buttons');
-		var slideOne = document.getElementsByClassName('slide')[0];
-		var slideTwo = document.getElementsByClassName('slide')[1];
-		var slideThree = document.getElementsByClassName('slide')[2];
-		
-
-		var sliderRatio = (sliderWindowOverfolw.clientWidth*9)/18;
+	var content = document.getElementsByClassName('content')[0];
+	slider_margin = (slider.clientWidth - content.clientWidth)/2;
+	slider.style.marginLeft = -slider_margin;
 	
-		if(window.innerWidth > 820){
-			slider.style.height = sliderRatio;
-			sliderWindowOverfolw.style.height = sliderRatio;
-			slideButtons.style.height = sliderRatio;
-			slideOne.style.height = sliderRatio;
-			slideTwo.style.height = sliderRatio;
-			slideThree.style.height = sliderRatio;
+	var in_slider = document.getElementsByClassName('inner_slider')[0];
+	var sliderRatio = (slider.clientWidth * 9)/16;
+	
+	
+	slider.style.height = sliderRatio;
+	
+	in_slider.style.height = sliderRatio;
+	in_slider.style.width = slider.clientWidth * 3;
+	
+	document.getElementById('slider_border').style.width = slider.clientWidth - 8; //..8 = borders
+	document.getElementById('slider_border').style.height = slider.clientHeight - 8; //..8 = borders
+	
+	
+	//.....................SLIDER FUNCTION......................
+	
+	var slide = document.getElementsByClassName('slide');
+	var floatText = document.getElementsByClassName('floatText');
+	var class_counter = 0;
+	
+	document.getElementById('buttonOne').onclick = function() {
+		if(! class_counter == 0){
+			class_counter--;
+			moveLeft();
 		}
+		console.log(class_counter);
+		clearInterval(autoSlide);
+	}
+	document.getElementById('buttonTwo').onclick = function(){
+		if(class_counter < 2){
+			class_counter++;
+			moveRight();
+		}
+		console.log(class_counter);
+		clearInterval(autoSlide);
+	}
+	var i = 0;
+	function moveRight(){
+		let rightTime = setInterval(function(){
+			if(class_counter == 1 && i > -slider_width){
+				i -= 50;
+				in_slider.style.marginLeft = i;
+			}
+			if(class_counter == 1 && i == -slider_width){
+				clearInterval(rightTime);
+			}
+			else if(class_counter == 2 && i > -(slider_width*2)){
+				i -= 50;
+				in_slider.style.marginLeft = i;
+			}
+			if(class_counter == 2 && i == -(slider_width*2)){
+				clearInterval(rightTime);
+			}
+			console.log(i);
+		}, 10);
+	}
+	function moveLeft(){
+		let leftTime = setInterval(function(){
+			if(class_counter == 0 && i < 0){
+				i += 50;
+				in_slider.style.marginLeft = i;
+			}
+			if(class_counter == 0 && i == 0){
+				clearInterval(leftTime);
+			}
+			else if(class_counter == 1 && i < -slider_width){
+				i += 50;
+				in_slider.style.marginLeft = i;
+			}
+			if(class_counter == 1 && i == -slider_width){
+				clearInterval(leftTime);
+			}
+			console.log(i);
+		}, 10);
+	}
+	
+	var autoSlide = setInterval(auto_slide, 3000);
+	function auto_slide(){
+		if(class_counter < 2){
+			var autoRight = setTimeout(function(){
+				class_counter++;
+				moveRight();
+			}, 2000);
+		}
+		if(class_counter == 2){
+			clearTimeout(autoRight);
+			if(class_counter > 0){
+				let autoLeft = setTimeout(function(){
+					class_counter--;
+					moveLeft();
+				}, 3000);
+			}
+			
+		}
+	console.log(autoSlide);
+	}
 	
 	
 	
@@ -143,42 +183,42 @@ var topperThree = document.getElementsByClassName('topper')[2];
 window.onscroll = function() {
 	
 	if(window.innerWidth <= 500) {
-		if(window.pageYOffset >= 920){
+		if(window.pageYOffset >= 1600){
+			for(var i=0; i<1; i++){
+				topperThree.style.opacity = (window.pageYOffset - 1600) / 200;
+			}
+		}
+		else if(window.pageYOffset >= 1400){
+			for(var i=0; i<1; i++){
+				topperTwo.style.opacity = (window.pageYOffset - 1400) / 200;
+			}
+		}
+		else if(window.pageYOffset >= 1100){
+			for(var i=0; i<3; i++){
+				topperOne.style.opacity = (window.pageYOffset - 1100) / 200;
+			}
+		}
+		else if(window.pageYOffset >= 920){
 			for(var i=0; i<3; i++) {
 				topTitle.style.opacity = (window.pageYOffset - 920) / 170;
 				topTitle.style.marginLeft = 1;
 				topTitle.style.transition = 'margin-left 1s ease-out';
 			}
 		}
-		if(window.pageYOffset >= 1100){
-			for(var i=0; i<3; i++){
-				topperOne.style.opacity = (window.pageYOffset - 1100) / 200;
-			}
-		}
-		if(window.pageYOffset >= 1400){
-			for(var i=0; i<1; i++){
-				topperTwo.style.opacity = (window.pageYOffset - 1400) / 200;
-			}
-		}
-		if(window.pageYOffset >= 1600){
-			for(var i=0; i<1; i++){
-				topperThree.style.opacity = (window.pageYOffset - 1600) / 200;
-			}
-		}
 	}
 	else{
-		if(window.pageYOffset >= 750){
-			for(var i=0; i<3; i++) {
-				topTitle.style.opacity = (window.pageYOffset - 750) / 170;
-				topTitle.style.marginLeft = 1;
-				topTitle.style.transition = 'margin-left 1s ease-out';
-			}
-		}
 		if(window.pageYOffset >= 1000){
 			for(var i=0; i<3; i++){
 				topperOne.style.opacity = (window.pageYOffset - 1000) / 180;
 				topperTwo.style.opacity = (window.pageYOffset - 1000) / 180;
 				topperThree.style.opacity = (window.pageYOffset - 1000) / 180;
+			}
+		}
+		else if(window.pageYOffset >= 750){
+			for(var i=0; i<3; i++) {
+				topTitle.style.opacity = (window.pageYOffset - 750) / 170;
+				topTitle.style.marginLeft = 1;
+				topTitle.style.transition = 'margin-left 1s ease-out';
 			}
 		}
 	}
