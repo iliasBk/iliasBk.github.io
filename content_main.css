@@ -3,7 +3,7 @@
 
 body{
 	margin: 0;
-	background: url('C:/Users/ilias/Desktop/BaksellBuk/images/back texture.png');
+	background: url('images/back texture.png');
 	font-family: 'Poppins', 'Fira Sans', 'B612', Arial;
 	color: #F0DBDB;
 	text-shadow: 0px 2px 10px rgba(0,0,0,.9);
@@ -78,7 +78,7 @@ body{
 #menu_button{
 	width: 70px;
 	height: 70px;
-	background-image: url('C:/Users/ilias/Desktop/BaksellBuk/images/menu_icon.png');
+	background-image: url('images/menu_icon.png');
 	background-size: 100%;
 	background-color: #622424;
 	border-top-right-radius: 4px;
@@ -91,7 +91,7 @@ body{
 	display: none;
 	width: 70px;
 	height: 70px;
-	background-image: url('C:/Users/ilias/Desktop/BaksellBuk/images/cross_icon.png');
+	background-image: url('images/cross_icon.png');
 	background-size: 100%;
 	background-color: #622424;
 	border-top-right-radius: 4px;
@@ -323,7 +323,7 @@ body{
 	#panier_button{
 		width: 70px;
 		height: 70px;
-		background-image: url('C:/Users/ilias/Desktop/BaksellBuk/images/panier_icon.png');
+		background-image: url('images/panier_icon.png');
 		background-size: 100%;
 		background-color: #622424;
 		border-top-left-radius: 4px;
@@ -337,7 +337,7 @@ body{
 		display: none;
 		width: 70px;
 		height: 70px;
-		background-image: url('C:/Users/ilias/Desktop/BaksellBuk/images/cross_icon.png');
+		background-image: url('images/cross_icon.png');
 		background-size: 100%;
 		background-color: #622424;
 		border-top-left-radius: 4px;
