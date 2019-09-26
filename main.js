@@ -241,9 +241,63 @@ window.onscroll = function() {
 		}
 	}
 	}
-	else{
-		
-	}
+	
+	//........MENU_PANIER_Onscroll.......
+			var menu = document.getElementById('menu');
+			var panier = document.getElementById('panier');
+			var sidebarOne = document.getElementById('sidebar_one');
+			var sidebarTwo = document.getElementById('sidebar_two');
+	
+			if (window.innerWidth > 820){
+				sidebarOne.style.marginTop = '0px';
+				menu.style.marginTop = '120px';
+				sidebarTwo.style.marginTop = '0px';
+				panier.style.marginTop = '120px';	
+				
+				sidebarOne.style.position = 'relative';
+				sidebarTwo.style.position = 'relative';
+				menu.style.position = 'fixed';
+				panier.style.position = 'fixed';
+			}
+			else if (window.innerWidth <= 500) {
+				if (window.pageYOffset >= 249) {
+					
+					sidebarOne.style.marginTop = '0px';
+					menu.style.marginTop = '30px';
+					sidebarTwo.style.marginTop = '0px';
+					panier.style.marginTop = '30px';
+					
+					sidebarOne.style.position = 'fixed';
+					sidebarTwo.style.position = 'fixed';
+					menu.style.position = 'fixed';
+					panier.style.position = 'fixed';
+					
+				}
+				else{
+					sidebarOne.style.marginTop = '130px';
+					menu.style.marginTop = '150px';
+					sidebarTwo.style.marginTop = '130px';
+					panier.style.marginTop = '150px';
+					
+					
+					sidebarOne.style.position = 'absolute';
+					sidebarTwo.style.position = 'absolute';
+					menu.style.position = 'absolute';
+					panier.style.position = 'absolute';
+				}
+			}
+			
+			else{
+				sidebarOne.style.marginTop = '0px';
+				menu.style.marginTop = '0px';
+				sidebarTwo.style.marginTop = '0px';
+				panier.style.marginTop = '0px';	
+				
+				sidebarOne.style.position = 'fixed';
+				sidebarTwo.style.position = 'fixed';
+				menu.style.position = 'fixed';
+				panier.style.position = 'fixed';
+			}
 }
 	
 	
