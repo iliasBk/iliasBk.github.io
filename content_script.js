@@ -57,6 +57,142 @@ close_page.onclick = function(){
 
 
 
+//.....Tab Slider Adapter.....
+
+
+var tab_slider = document.getElementById('tab_slider');
+var tab_info = document.getElementById('tab_info');
+var tab_buy = document.getElementById('tab_buy');
+var inner_tab_slider = document.getElementById('inner_tab_slider');
+var tab_slider_border = document.getElementById('tab_slider_border');
+var slider = document.getElementById('slider');
+var indicators = document.getElementById('indicators');
+var tabSliderRatio = (inner_tab_slider.clientHeight*8)/9;
+
+inner_tab_slider.style.width = tabSliderRatio;
+
+if(tab_page.clientHeight>tab_page.clientWidth){
+	tab_slider.style.width = '100%';
+	tab_slider.style.height = '50%';
+	
+	tab_info.style.width = '100%';
+	tab_info.style.height = '30%';
+	
+	tab_buy.style.width = '100%';
+	tab_buy.style.height = '20%';
+	
+	inner_tab_slider.style.width = '100%';
+	inner_tab_slider.style.height = (inner_tab_slider.clientWidth*9)/14;
+	
+	if(inner_tab_slider.clientHeight > tab_slider.clientHeight){
+		inner_tab_slider.style.height = tab_slider.clientHeight;
+		inner_tab_slider.style.width = (inner_tab_slider.clientHeight*14)/9;
+	}
+	else{
+		inner_tab_slider.style.marginTop = (tab_slider.clientHeight-	inner_tab_slider.clientHeight)/2;
+	}
+	
+}
+else{
+	if(inner_tab_slider.clientWidth >= tab_slider.clientWidth){
+		inner_tab_slider.style.width = tab_slider.clientWidth;
+		inner_tab_slider.style.height = (tab_slider.clientWidth*10)/8;
+		inner_tab_slider.style.marginTop = (tab_slider.clientHeight-inner_tab_slider.clientHeight)/3;
+	}
+}
+
+slider.style.width = tab_slider_border.clientWidth*3; 
+slider.style.height = tab_slider_border.clientHeight; 
+
+indicators.style.width = tab_slider_border.clientWidth;
+
+//.....Tab Slider Function....
+
+var indicator = document.getElementsByClassName('indicator');
+slider.addEventListener('touchstart', spot);
+slider.addEventListener('touchmove', spotMove);
+var spotTouch;
+var count = 0;
+var i = 0;
+
+indicator[count].style.opacity = '1';
+
+function spot(ev){
+	spotTouch = ev.touches[0].clientX;
+}
+function spotMove(ev){
+	
+	var spotMove = spotTouch - ev.touches[0].clientX;
+	
+	if(spotMove < 0){
+		moveLeft();
+		if(count == 2 && i == -200){
+			count--;
+			console.log(count);
+		}
+		else if(count==1 && i == -100){
+			count--;
+			console.log(count);
+		}
+	}
+	else if(spotMove > 0){
+		moveRight();
+		if(count == 0 && i == 0){
+			count++;
+			console.log(count);
+		}
+		else if(count == 1 && i == -100){
+			count++;
+			console.log(count);
+		}
+	}
+	
+}
+
+function moveLeft(){
+	for(let i=0;i<indicator.length;i++){
+		indicator[i].style.opacity = 0;
+		indicator[count].style.opacity = 1;
+	}
+	var moveLeftInt = setInterval(function(){
+		if(count == 1 && i < -100){
+			i++;
+			slider.style.marginLeft = i + '%';
+		}
+		else if(count == 0 && i < 0){
+			i++;
+			slider.style.marginLeft = i + '%';
+		}
+		else{
+			clearInterval(moveLeftInt);
+		}
+	}, 20);
+}
+function moveRight(){
+	for(let i=0;i<indicator.length;i++){
+		indicator[i].style.opacity = 0;
+		indicator[count].style.opacity = 1;
+	}
+	var moveRightInt = setInterval(function(){
+		if(count == 1 && i > -100){
+			i--;
+			slider.style.marginLeft = i + '%';
+		}
+		else if(count == 2 && i > -200){
+			i--;
+			slider.style.marginLeft = i + '%';
+		}
+		else{
+			clearInterval(moveRightInt);
+		}
+	}, 20);
+}
+
+function autoSlider(){
+	
+}
+
+
 //........MENU_PANIER_Onscroll.......
 
 
