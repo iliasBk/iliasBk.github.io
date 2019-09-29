@@ -7,15 +7,16 @@ var tab_wrap = document.getElementById('tab_wrap');
 var close_page = document.getElementById('close_tab_page');
 var plus = 100;
 
-for(var i=0; i < pieceMarg.length; i++){
-	pieceMargRatio = (pieceMarg[i].clientWidth*4)/5;
-	pieceMarg[i].style.height = pieceMargRatio;
+
+for(let d=0; d < pieceMarg.length; d++){
+	pieceMargRatio = (pieceMarg[d].clientWidth*4)/5;
+	pieceMarg[d].style.height = pieceMargRatio;
 	
-	document.getElementById('piece_quantity').innerHTML = i+1;
+	document.getElementById('piece_quantity').innerHTML = d+1;
 	
 //...Open Tab Page.....
 
-	pieceMarg[i].onclick = function(){
+	pieceMarg[d].onclick = function(){
 		tab_wrap.style.display = 'block'; 
 				var tabPageOpen = setInterval(function(){
 					
@@ -28,6 +29,30 @@ for(var i=0; i < pieceMarg.length; i++){
 						clearInterval(tabPageOpen);
 					}
 				},10);
+				
+//.................ASSOCIATIVE CLASS SYSTEM....................
+
+		var slide = document.getElementsByClassName('slide');
+		
+		//...slide img
+		for(let p=0;p<slide.length;p++){
+			slide[p].style.backgroundImage = 'url(images/tabslide/tabslide_'+d+'/slide'+p+'.png)';
+		}
+		
+		//...info text
+		
+		var txt = document.getElementsByClassName('text');
+		for(let p=0;p<txt.length;p++){	
+			txt[p].style.display = 'none';
+			txt[d].style.display = 'block';
+		}
+		
+		//...buy button
+		
+		var buy_id = document.getElementById('buy_id');
+		buy_id.value = d;
+		console.log(buy_id.value)
+		
 	}
 	
 }
@@ -64,6 +89,7 @@ close_page.onclick = function(){
 var tab_slider = document.getElementById('tab_slider');
 var tab_info = document.getElementById('tab_info');
 var tab_buy = document.getElementById('tab_buy');
+var buy_button = document.getElementById('buy_button');
 var inner_tab_slider = document.getElementById('inner_tab_slider');
 var tab_slider_border = document.getElementById('tab_slider_border');
 var slider = document.getElementById('slider');
@@ -98,7 +124,7 @@ if(tab_page.clientHeight>tab_page.clientWidth){
 else{
 	if(inner_tab_slider.clientWidth >= tab_slider.clientWidth){
 		inner_tab_slider.style.width = tab_slider.clientWidth;
-		inner_tab_slider.style.height = (tab_slider.clientWidth*10)/8;
+		inner_tab_slider.style.height = (tab_slider.clientWidth*9)/8;
 		inner_tab_slider.style.marginTop = (tab_slider.clientHeight-inner_tab_slider.clientHeight)/3;
 	}
 }
@@ -107,7 +133,6 @@ tab_slider_border.style.width = tab_slider_border.clientWidth-(tab_slider_border
 
 slider.style.width = tab_slider_border.clientWidth*3; 
 slider.style.height = tab_slider_border.clientHeight; 
-
 
 indicators.style.width = tab_slider_border.clientWidth;
 indicators.style.marginTop = -indicators.clientHeight;
@@ -247,6 +272,7 @@ for(let i=0;i<indicator.length;i++){
 		console.log(count);
 	}
 }
+
 
 
 //........MENU_PANIER_Onscroll.......

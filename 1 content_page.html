@@ -24,29 +24,41 @@
 			<div id="inner_tab_slider">
 				<div id="tab_slider_border">
 					<div id="slider">
-						<div class="slide" style="background-image: url('slider/slide1.jpg');">
+						<div class="slide" style="background-image: url('');">
 						</div>
-						<div class="slide" style="background-image: url('slider/slide2.jpg');">
+						<div class="slide" style="background-image: url('');">
 						</div>
-						<div class="slide" style="background-image: url('slider/slide3.jpg');">
+						<div class="slide" style="background-image: url('');">
 						</div>
 					</div>
 					
 					<div id="indicators">
-						<div class="indicator"></div>
-						<div class="indicator"></div>
-						<div class="indicator"></div>
+						<div class="indicator_place">
+							<div class="indicator"></div>
+						</div>
+						<div class="indicator_place">
+							<div class="indicator"></div>
+						</div>
+						<div class="indicator_place">
+							<div class="indicator"></div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		
 		<div id="tab_info">
-			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam feugiat, turpis at pulvinar vulputate, erat libero tristique tellus, nec bibendum odio risus sit amet ante. Aliquam erat volutpat. Nunc auctor. Mauris pretium quam et urna. Fusce nibh. Duis risus. Curabitur sagittis hendrerit ante. Aliquam erat volutpat. Vestibulum erat nulla, ullamcorper nec, rutrum non, nonummy ac, erat. Duis condimentum augue id magna semper rutrum. Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit. Proin pede metus, vulputate nec, fermentum fringilla, vehicula vitae, justo. Fusce consectetuer risus a nunc. Aliquam ornare wisi eu metus. Integer pellentesque quam vel velit. Duis pulvinar.</p>
+			<p class="text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam feugiat, turpis at pulvinar vulputate, erat libero tristique tellus, nec bibendum odio risus sit amet ante. </p>
+			<p class="text">Aliquam erat volutpat. Nunc auctor. Mauris pretium quam et urna. Fusce nibh. Duis risus. Curabitur sagittis hendrerit ante. Aliquam erat volutpat. Vestibulum erat nulla, ullamcorper nec, rutrum non, nonummy ac, erat. </p>
+			<p class="text">Duis condimentum augue id magna semper rutrum. Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit. Proin pede metus, vulputate nec, fermentum fringilla, vehicula vitae, justo. Fusce consectetuer risus a nunc. Aliquam ornare wisi eu metus. Integer pellentesque quam vel velit. Duis pulvinar.</p>
+			<p class="text">Aliquam erat volutpat. Nunc auctor. Mauris pretium quam et urna. Fusce nibh. Duis risus. Curabitur sagittis hendrerit ante. Aliquam erat volutpat. Vestibulum erat nulla, ullamcorper nec, rutrum non, nonummy ac, erat. </p>
 		</div>
 		
 		<div id="tab_buy">
-			<div id="buy_button">Acheter</div>
+			<form>
+				<input id="buy_id" disabled>
+				<input id="buy_button" type="submit" value="Acheter">
+			</form>
 		</div>
 
 	</div>
@@ -158,7 +170,9 @@
 				<div id="totMontant"><p>Montant total: <a id="montant_num">0</a>$</p></div>
 				<div id="pass_commande">
 					<div style="width: 260px;">
-						<div id="go_commande">Commander</div>
+						<a href="commande_page.html">
+						<p id="go_commande">Commander</p>
+						</a>
 					</div>
 				</div>
 			</div>	
