@@ -60,6 +60,7 @@ close_page.onclick = function(){
 //.....Tab Slider Adapter.....
 
 
+
 var tab_slider = document.getElementById('tab_slider');
 var tab_info = document.getElementById('tab_info');
 var tab_buy = document.getElementById('tab_buy');
@@ -67,6 +68,7 @@ var inner_tab_slider = document.getElementById('inner_tab_slider');
 var tab_slider_border = document.getElementById('tab_slider_border');
 var slider = document.getElementById('slider');
 var indicators = document.getElementById('indicators');
+var indicator = document.getElementsByClassName('indicator');
 var tabSliderRatio = (inner_tab_slider.clientHeight*8)/9;
 
 inner_tab_slider.style.width = tabSliderRatio;
@@ -101,17 +103,24 @@ else{
 	}
 }
 
+tab_slider_border.style.width = tab_slider_border.clientWidth-(tab_slider_border.clientWidth % 10);
+
 slider.style.width = tab_slider_border.clientWidth*3; 
 slider.style.height = tab_slider_border.clientHeight; 
 
+
 indicators.style.width = tab_slider_border.clientWidth;
+indicators.style.marginTop = -indicators.clientHeight;
+
+tab_wrap.style.display = 'none';
+
 
 //.....Tab Slider Function....
 
-var indicator = document.getElementsByClassName('indicator');
 slider.addEventListener('touchstart', spot);
 slider.addEventListener('touchmove', spotMove);
 var spotTouch;
+var spotMove;
 var count = 0;
 var i = 0;
 
@@ -122,9 +131,10 @@ function spot(ev){
 }
 function spotMove(ev){
 	
-	var spotMove = spotTouch - ev.touches[0].clientX;
+	spotMove = spotTouch - ev.touches[0].clientX;
 	
 	if(spotMove < 0){
+		clearInterval(autoSlideTime);
 		moveLeft();
 		if(count == 2 && i == -200){
 			count--;
@@ -136,6 +146,7 @@ function spotMove(ev){
 		}
 	}
 	else if(spotMove > 0){
+		clearInterval(autoSlideTime);
 		moveRight();
 		if(count == 0 && i == 0){
 			count++;
@@ -166,7 +177,7 @@ function moveLeft(){
 		else{
 			clearInterval(moveLeftInt);
 		}
-	}, 20);
+	}, 10);
 }
 function moveRight(){
 	for(let i=0;i<indicator.length;i++){
@@ -185,11 +196,56 @@ function moveRight(){
 		else{
 			clearInterval(moveRightInt);
 		}
-	}, 20);
+	}, 10);
 }
 
-function autoSlider(){
+var stop = 0;
+var autoSlideTime = setInterval(autoSlide, 3000);
+function autoSlide(){
+	console.log('yes');
+	if(stop == 0){
+			if(count == 0 && i == 0){
+				count++;
+				console.log(count);
+			}
+			else if(count == 1 && i == -100){
+				count++;
+				console.log(count);
+				stop = 1;
+			}
+			moveRight();
+	}
+	else if(stop == 1){
+		if(count == 2 && i == -200){
+			count--;
+			console.log(count);
+		}
+		else if(count==1 && i == -100){
+			count--;
+			console.log(count);
+			stop = 0;
+		}
+		moveLeft();
+	}
 	
+}
+
+//... Indicator Slide Control...
+
+for(let i=0;i<indicator.length;i++){
+	indicator[i].onclick = function(){
+		clearInterval(autoSlideTime);
+		var countIndicator = i;
+		if(countIndicator > count){
+			count = i;
+			moveRight();
+		}
+		else if(countIndicator< count){
+			count = i;
+			moveLeft();
+		}
+		console.log(count);
+	}
 }
 
 
